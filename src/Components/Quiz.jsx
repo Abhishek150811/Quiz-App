@@ -9,6 +9,7 @@ export default function Quiz() {
   const quizIsComplete = activeQuestionIndex === QUESTIONS.length ;
   
   function handleSelectedAnswer(selectedAnswer) {
+    // console.log("answer is filled") ;
     setUserAnswers((prevAnswers) => {
       return [...prevAnswers, selectedAnswer];
     });
@@ -22,15 +23,13 @@ export default function Quiz() {
       </div>
     )
   }
-  
+
   const shuffledAnswer = [...QUESTIONS[activeQuestionIndex].answers]
   shuffledAnswer.sort(() => Math.random() - 0.5) ;
   return (
     <div id="quiz">
       <div id="question">
-      <QuestionTimer timeout={10000} onTimeout={()=>{
-        handleSelectedAnswer(null) ;
-      }} />
+      <QuestionTimer timeout={10000}  onTimeout={()=> handleSelectedAnswer(null)} />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul id="answers">
           {shuffledAnswer.map((answer) => (
